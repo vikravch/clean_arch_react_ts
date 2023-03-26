@@ -1,23 +1,25 @@
 import React, {useEffect} from 'react';
 import logo from '../logo.svg';
 import './App.css';
-import getWeather from "../domain/use_case/GetWeather";
+import {useDispatch, useSelector} from "react-redux";
+import {getWeather} from "./redux/actions";
+import Weather from "../domain/model/weather";
+import {Store} from "./redux/types";
 
 function App() {
 
-  const [weather, setWeather] = React.useState({});
+  const weather: Weather | null = useSelector<Store, Weather | null>(
+      (state: Store) => state.weather.weather);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getWeather('Haifa').then((weather) => {
-      console.log(weather);
-      setWeather(weather);
-    });
+    dispatch(getWeather('Haifa'));
   }, []);
 
   return (
       <div className="App">
         <h4>{
-          JSON.stringify(weather)
+            (weather)?JSON.stringify(weather):'Loading...'
         }</h4>
       </div>
   );
