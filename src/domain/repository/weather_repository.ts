@@ -1,5 +1,5 @@
-import Weather from "../model/weather";
+import type Weather from '../model/weather'
 
 export default interface WeatherRepository {
-    getWeather(cityName: string): Promise<Weather>;
+  getWeather: (cityName: string) => Promise<Weather>
 }

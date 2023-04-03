@@ -1,4 +1,4 @@
-export type Action = {
-    type: string,
-    payload: any | undefined
+export interface Action {
+  type: string
+  payload: any | undefined
 }

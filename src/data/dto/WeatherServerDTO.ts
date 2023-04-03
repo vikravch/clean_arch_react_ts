@@ -1,14 +1,15 @@
-import Weather from "../../domain/model/weather";
+import Weather from '../../domain/model/weather'
 
-export default class WeatherServerDTO extends Weather{
-    constructor(json: any) {
-        super(
-            json.name,
-            json.main.temp,
-            json.wind.speed,
-            json.visibility);
-        console.log(json);
-    }
+export default class WeatherServerDTO extends Weather {
+  constructor (json: any) {
+    super(
+      json.name,
+      json.main.temp,
+      json.wind.speed,
+      json.visibility
+    )
+    console.log(json)
+  }
 }
 
 /*

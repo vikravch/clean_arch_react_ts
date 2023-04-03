@@ -1,4 +1,4 @@
 export default interface CacheRepository {
-    getLastWeather(): Promise<string | null>;
-    saveLastWeather(value: string): Promise<void>;
+  getLastWeather: () => Promise<string | null>
+  saveLastWeather: (value: string) => Promise<void>
 }

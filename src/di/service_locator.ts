@@ -1,26 +1,26 @@
-import WeatherServerRepository from "../data/repository/weather_server_repository";
-import CacheLocalStoreRepository from "../data/repository/cache_local_store_repository";
-import WeatherRepository from "../domain/repository/weather_repository";
-import CacheRepository from "../domain/repository/cache_repository";
+import WeatherServerRepository from '../data/repository/weather_server_repository'
+import CacheLocalStoreRepository from '../data/repository/cache_local_store_repository'
+import type WeatherRepository from '../domain/repository/weather_repository'
+import type CacheRepository from '../domain/repository/cache_repository'
 
-type Locator = {
-    weatherRepository: WeatherRepository,
-    cacheRepository: CacheRepository,
+interface Locator {
+  weatherRepository: WeatherRepository
+  cacheRepository: CacheRepository
 }
-let locatorResolver:()=>Locator;
-function locatorCreator(): ()=>Locator{
-    const weatherRepository:WeatherRepository = new WeatherServerRepository();
-    const cacheRepository:CacheRepository = new CacheLocalStoreRepository();
+let locatorResolver: () => Locator
+function locatorCreator (): () => Locator {
+  const weatherRepository: WeatherRepository = new WeatherServerRepository()
+  const cacheRepository: CacheRepository = new CacheLocalStoreRepository()
 
-    const locator = {
-        weatherRepository: weatherRepository,
-        cacheRepository: cacheRepository,
-    };
-    return ()=> locator;
+  const locator = {
+    weatherRepository,
+    cacheRepository
+  }
+  return () => locator
 }
-export function useLocator():Locator{
-    if(!locatorResolver){
-        locatorResolver = locatorCreator();
-    }
-    return locatorResolver();
+export default function useLocator (): Locator {
+  if (locatorResolver !== undefined) {
+    locatorResolver = locatorCreator()
+  }
+  return locatorResolver()
 }
